@@ -188,6 +188,8 @@ function exgsearch#confirm_select(modifier)
         let target_line = line('.')
         let target_col = col('.')
         execute "normal " . target_line . "G" . target_col . "|"
+        execute "KangarooPush"
+        
 
         " jump to the pattern if the code have been modified 
         let pattern = strpart(line, idx+2) 
@@ -237,6 +239,7 @@ function exgsearch#search( pattern, method )
     let target_line = line('.')
     let target_col = col('.')
     execute "normal " . target_line . "G" . target_col . "|"
+    execute "KangarooPush"
     
     let s:confirm_at = -1
     let id_path = s:id_file
