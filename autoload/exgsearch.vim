@@ -184,6 +184,11 @@ function exgsearch#confirm_select(modifier)
         let linenr  = eval(strpart(line, 0, idx)) 
         exec ' call cursor(linenr, 1)' 
 
+        " [Geng]: add the target line&col to jump list
+        let target_line = line('.')
+        let target_col = col('.')
+        execute "normal " . target_line . "G" . target_col . "|"
+
         " jump to the pattern if the code have been modified 
         let pattern = strpart(line, idx+2) 
         let pattern = '\V' . substitute( pattern, '\', '\\\', "g" ) 
@@ -228,6 +233,11 @@ function s:sort_search_result( start, end )
 endfunction
 
 function exgsearch#search( pattern, method )
+    " [Geng]: add the target line&col to jump list
+    let target_line = line('.')
+    let target_col = col('.')
+    execute "normal " . target_line . "G" . target_col . "|"
+    
     let s:confirm_at = -1
     let id_path = s:id_file
 
